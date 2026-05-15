@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>SS Gems | 92.5 Silver • Jaipur Heritage</title>
+  <!-- Google Fonts + Font Awesome + GSAP + Lenis -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fefcf7;
+      color: #2a2418;
+      overflow-x: hidden;
+    }
+
+    /* Fixed background image from catalog (low opacity) */
+    .bg-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://i.ibb.co/mVHQtGrp/Chat-GPT-Image-May-8-2026-04-09-29-PM.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.06;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 1.8rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 0.7rem 1.8rem;
+      background: rgba(255, 251, 240, 0.9);
+      backdrop-filter: blur(8px);
+      border-radius: 2.5rem;
+      margin: 1rem 0 1.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(201, 163, 85, 0.2);
+    }
+    .logo h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: #b8873a;
+    }
+    .logo p {
+      font-size: 0.7rem;
+      letter-spacing: 1.5px;
+      color: #8f7a57;
+    }
+    .nav-links a {
+      margin-left: 1.8rem;
+      text-decoration: none;
+      font-weight: 500;
+      color: #4a3e2c;
+      transition: 0.2s;
+    }
+    .nav-links a:hover { color: #c9a355; }
+    .wa-btn {
+      background: #25d36610;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      color: #1e7b48;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* hero */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+      padding: 1rem 0 2rem;
+    }
+    .hero-content { flex: 1.2; }
+    .hero-badge {
+      background: #f3ebdd;
+      display: inline-block;
+      padding: 0.2rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #b8873a;
+      margin-bottom: 0.8rem;
+    }
+    .hero-content h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5.5vw, 4rem);
+      font-weight: 600;
+      color: #2a2418;
+      line-height: 1.2;
+      transform-style: preserve-3d;
+    }
+    .gold-text { color: #c9a355; }
+    .hero-desc {
+      margin: 1rem 0 1.2rem;
+      font-size: 1rem;
+      color: #5e5340;
+      max-width: 480px;
+    }
+    .cta-group {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.75rem 1.8rem;
+      border-radius: 2.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .btn-primary {
+      background: #c9a355;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(201, 163, 85, 0.25);
+    }
+    .btn-primary:hover {
+      background: #b8873a;
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      border: 1.5px solid #c9a355;
+      color: #5e4b30;
+      background: transparent;
+    }
+    .btn-outline:hover {
+      background: #fef5e8;
+    }
+    .hero-image { flex: 0.9; text-align: center; }
+    .floating-gem-img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 1.8rem;
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+      animation: floatSoft 4s infinite alternate;
+    }
+    @keyframes floatSoft {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-12px); }
+    }
+
+    /* 3D text animation class */
+    .text-3d {
+      transition: transform 0.3s ease;
+      transform-style: preserve-3d;
+    }
+    .text-3d:hover {
+      transform: translateZ(20px) rotateX(5deg);
+    }
+
+    .section {
+      margin: 2.5rem 0 3rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      color: #2a2418;
+    }
+    .section-title span {
+      border-bottom: 2px solid #e8d1a4;
+      padding-bottom: 4px;
+    }
+
+    /* catalog wrapper */
+    .catalog-wrapper {
+      margin: 1rem 0 2rem;
+      display: none;
+    }
+    .catalog-wrapper.show {
+      display: block;
+      animation: fadeSlideUp 0.5s ease;
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .gem-card {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+      cursor: pointer;
+      border: 1px solid #f0e3d0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: #fff;
+    }
+    .gem-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+      border-color: #c9a355;
+    }
+    .gem-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: contain;
+      display: block;
+      transition: 0.3s;
+    }
+    .gem-card:hover img {
+      transform: scale(1.02);
+    }
+
+    /* features grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .feature-card {
+      background: #ffffffd9;
+      padding: 1.3rem;
+      border-radius: 1.5rem;
+      border: 1px solid #f0e3d0;
+      text-align: center;
+      transition: 0.2s;
+    }
+    .feature-card i {
+      font-size: 1.8rem;
+      color: #c9a355;
+      margin-bottom: 0.5rem;
+    }
+    .feature-card h3 { font-size: 1.2rem; margin-bottom: 0.3rem; }
+
+    /* CEO section new */
+    .ceo-section {
+      background: #fffaf2;
+      border-radius: 2rem;
+      padding: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+      border: 1px solid #f0e3d0;
+    }
+    .ceo-section h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: #b8873a;
+    }
+    .ceo-section p {
+      max-width: 700px;
+      margin: 0.8rem auto;
+      color: #5e5340;
+    }
+
+    .marquee {
+      background: #fef5e8;
+      padding: 0.7rem;
+      border-radius: 2rem;
+      margin: 1rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-content {
+      display: inline-block;
+      animation: marquee 20s linear infinite;
+      font-weight: 500;
+      font-size: 0.85rem;
+    }
+    .marquee-content span { margin: 0 1.5rem; color: #b8873a; }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .testimonial-grid {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding: 0.5rem 0;
+    }
+    .testimonial-card {
+      min-width: 270px;
+      background: #fff;
+      padding: 1.2rem;
+      border-radius: 1.2rem;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.03);
+    }
+    .pricing-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    .price-card {
+      background: #fff;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      width: 250px;
+      text-align: center;
+      border: 1px solid #e8dcce;
+    }
+    .price-card.highlight { border: 2px solid #c9a355; }
+    .btn-wa { background: #25d366; color: #1f3a2b; width: 100%; }
+
+    footer {
+      border-top: 1px solid #ede3d5;
+      padding: 1.2rem 0;
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 750px) {
+      .container { padding: 0 1rem; }
+      .navbar { flex-direction: column; gap: 0.6rem; }
+      .nav-links a { margin: 0 0.8rem; }
+      .hero { flex-direction: column-reverse; text-align: center; }
+      .hero-desc { margin-left: auto; margin-right: auto; }
+      .cta-group { justify-content: center; }
+      .gem-card img { height: 200px; }
+    }
+  </style>
+</head>
+<body>
+<div class="bg-fixed"></div>
+
+<div class="container">
+  <nav class="navbar">
+    <div class="logo"><h1>SS GEMS</h1><p>JAIPUR • 925 SILVER</p></div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#" id="exploreBtn">Explore Collection</a>
+      <a href="#features">Craft</a>
+      <a href="#ceo">Legacy</a>
+    </div>
+    <div class="wa-btn"><i class="fab fa-whatsapp"></i> +91 9571174491</div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fas fa-gem"></i> Heritage since 1998</div>
+      <h1 class="text-3d">M. Saleem Shaikh <span class="gold-text">SS Gems</span><br>92.5 Silver & Gemstones</h1>
+      <p class="hero-desc">Handcrafted rings, bracelets, necklaces — made to order. Ethically sourced, Jaipur's finest.</p>
+      <div class="cta-group">
+        <a href="https://wa.me/919571174491" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Enquire Now</a>
+        <a href="#" id="exploreBtn2" class="btn btn-outline"><i class="fas fa-images"></i> View Catalog →</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img class="floating-gem-img" src="https://i.ibb.co/mVHQtGrp/Chat-GPT-Image-May-8-2026-04-09-29-PM.png" alt="Premium Ring">
+    </div>
+  </div>
+
+  <div class="marquee">
+    <div class="marquee-content">
+      <span>✦ 100% Hallmarked Silver 925 ✦</span>
+      <span>✦ Certified Natural Gemstones ✦</span>
+      <span>✦ Made‑to‑Order Mastery ✦</span>
+      <span>✦ Worldwide Shipping ✦</span>
+      <span>✦ 500+ Happy Collectors ✦</span>
+      <span>✦ Jaipur Pink City ✦</span>
+      <span>✦ 100% Hallmarked Silver 925 ✦</span>
+    </div>
+  </div>
+
+  <!-- Catalog Section -->
+  <div id="catalogSection" class="catalog-wrapper">
+    <h2 class="section-title"><span>Artisan Catalog</span></h2>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+
+  <!-- CEO Legacy Section -->
+  <div id="ceo" class="ceo-section">
+    <i class="fas fa-crown" style="font-size: 2rem; color: #c9a355;"></i>
+    <h3>M. Saleem Shaikh — The Gem Guardian</h3>
+    <p>Third‑generation gemologist and silversmith, Saleem Shaikh carries forward a royal Jaipur legacy. Every piece is ethically sourced, handcrafted in 92.5 silver, and infused with the soul of Rajasthan's ateliers. Made‑to‑order luxury, built on trust and timeless artistry.</p>
+  </div>
+
+  <!-- Features -->
+  <section id="features" class="section">
+    <h2 class="section-title"><span>Why SS Gems?</span></h2>
+    <div class="features-grid">
+      <div class="feature-card"><i class="fas fa-ring"></i><h3>92.5 Sterling Silver</h3><p>Rhodium plated, everlasting shine</p></div>
+      <div class="feature-card"><i class="fas fa-gem"></i><h3>Natural Gemstones</h3><p>Emerald, ruby, sapphire & more</p></div>
+      <div class="feature-card"><i class="fas fa-pen-fancy"></i><h3>Made‑to‑Order</h3><p>Custom designs, your vision</p></div>
+      <div class="feature-card"><i class="fas fa-map-marker-alt"></i><h3>Jaipur Craft Hub</h3><p>Royal gem legacy</p></div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <div class="testimonial-grid" style="margin: 1rem 0;">
+    <div class="testimonial-card"><i class="fas fa-star" style="color:#c9a355;"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>"Heirloom quality — the necklace is breathtaking." — R. Mehta</p></div>
+    <div class="testimonial-card"><i class="fas fa-star" style="color:#c9a355;"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>"Custom ring exceeded all expectations." — A. Sharma</p></div>
+  </div>
+
+  <!-- Pricing -->
+  <div class="pricing-cards" style="margin: 1.5rem 0;">
+    <div class="price-card"><i class="fas fa-ring"></i><h3>Signature Ring</h3><a href="https://wa.me/919571174491" class="btn btn-primary btn-wa" style="background:#25d366; color:#1f3a2b;">WhatsApp</a></div>
+    <div class="price-card highlight"><i class="fas fa-necklace"></i><h3>Heritage Necklace</h3><a href="https://wa.me/919571174491" class="btn btn-primary" style="background:#c9a355;">Get Quote</a></div>
+    <div class="price-card"><i class="fas fa-hand-peace"></i><h3>Bracelet Set</h3><a href="https://wa.me/919571174491" class="btn btn-outline">Custom Order</a></div>
+  </div>
+
+  <!-- Final CTA -->
+  <div style="background: #fffaf2; border-radius: 2rem; padding: 1.8rem; text-align: center; margin: 1rem 0;">
+    <h2 style="font-size: 1.8rem; font-family: 'Cormorant Garamond';">Begin Your Legacy</h2>
+    <a href="https://wa.me/919571174491" class="btn btn-primary" style="background:#25d366; color:#1f3a2b; margin-top: 0.8rem;"><i class="fab fa-whatsapp"></i> +91 9571174491</a>
+    <p style="margin-top: 1rem;"><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan • By appointment</p>
+  </div>
+
+  <footer>
+    <p>© 2025 SS Gems n Creation — CEO M. Saleem Shaikh — 92.5 Silver & Precious Stones</p>
+    <div style="margin-top: 0.5rem;">
+      <a href="#" style="color:#c9a355; margin:0 0.6rem;"><i class="fab fa-instagram"></i></a>
+      <a href="#" style="color:#c9a355; margin:0 0.6rem;"><i class="fab fa-facebook"></i></a>
+      <a href="https://wa.me/919571174491" style="color:#c9a355;"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Catalog images (exactly as provided)
+  const imageUrls = [
+    "https://i.ibb.co/mVHQtGrp/Chat-GPT-Image-May-8-2026-04-09-29-PM.png",
+    "https://i.ibb.co/RpFnQyjg/Chat-GPT-Image-May-8-2026-04-09-21-PM.png",
+    "https://i.ibb.co/JFb3B0Rk/Chat-GPT-Image-May-8-2026-04-09-11-PM.png",
+    "https://i.ibb.co/BM8V8XQ/Chat-GPT-Image-May-8-2026-03-45-24-PM.png",
+    "https://i.ibb.co/BV7knYCS/Chat-GPT-Image-May-8-2026-03-39-42-PM.png",
+    "https://i.ibb.co/xqzT437P/Whats-App-Image-2026-05-08-at-3-28-52-PM-2.jpg",
+    "https://i.ibb.co/fdqZXX2q/Whats-App-Image-2026-05-08-at-3-28-51-PM.jpg",
+    "https://i.ibb.co/VWwPKL8b/Whats-App-Image-2026-05-08-at-3-28-52-PM-1.jpg",
+    "https://i.ibb.co/Vcb44z83/Chat-GPT-Image-May-8-2026-04-08-58-PM.png",
+    "https://i.ibb.co/chpPF9mj/Chat-GPT-Image-May-8-2026-04-08-50-PM.png"
+  ];
+
+  const galleryContainer = document.getElementById('galleryGrid');
+  imageUrls.forEach(url => {
+    const card = document.createElement('div');
+    card.className = 'gem-card';
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = 'SS Gems Creation';
+    img.loading = 'lazy';
+    card.appendChild(img);
+    galleryContainer.appendChild(card);
+  });
+
+  // Catalog toggle
+  const catalogDiv = document.getElementById('catalogSection');
+  const exploreBtn = document.getElementById('exploreBtn');
+  const exploreBtn2 = document.getElementById('exploreBtn2');
+
+  function showCatalog() {
+    if (!catalogDiv.classList.contains('show')) {
+      catalogDiv.classList.add('show');
+      setTimeout(() => {
+        catalogDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    } else {
+      catalogDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+  exploreBtn.addEventListener('click', (e) => { e.preventDefault(); showCatalog(); });
+  exploreBtn2.addEventListener('click', (e) => { e.preventDefault(); showCatalog(); });
+
+  // Smooth scroll
+  const lenis = new Lenis({ duration: 0.9 });
+  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+
+  // GSAP + 3D text animations
+  gsap.registerPlugin(ScrollTrigger);
+
+  // 3D tilt on hero heading
+  gsap.to(".hero-content h1", {
+    scrollTrigger: {
+      trigger: ".hero",
+      start: "top 80%",
+      end: "bottom 20%",
+      scrub: 1
+    },
+    rotateX: 8,
+    rotateY: 4,
+    duration: 1,
+    ease: "none"
+  });
+
+  gsap.from(".hero-content h1", { duration: 0.8, y: 50, opacity: 0, ease: "power2.out", delay: 0.1 });
+  gsap.from(".hero-desc", { duration: 0.6, y: 20, opacity: 0, delay: 0.3 });
+  gsap.from(".floating-gem-img", { duration: 0.9, scale: 0.9, opacity: 0, delay: 0.2 });
+  gsap.from(".feature-card", { scrollTrigger: { trigger: "#features", start: "top 80%" }, duration: 0.5, y: 30, opacity: 0, stagger: 0.1 });
+  gsap.from(".ceo-section", { scrollTrigger: { trigger: "#ceo", start: "top 85%" }, duration: 0.7, y: 30, opacity: 0, rotationX: 5 });
+
+  // Floating effect for catalog cards on scroll
+  gsap.from(".gem-card", {
+    scrollTrigger: { trigger: "#catalogSection", start: "top 85%" },
+    duration: 0.6,
+    scale: 0.95,
+    opacity: 0,
+    stagger: 0.05
+  });
+
+  // Magnetic button effect
+  const btns = document.querySelectorAll('.btn-primary, .btn-outline');
+  btns.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width/2;
+      const y = e.clientY - rect.top - rect.height/2;
+      btn.style.transform = `translate(${x*0.15}px, ${y*0.15}px)`;
+    });
+    btn.addEventListener('mouseleave', () => btn.style.transform = '');
+  });
+</script>
+</body>
+</html>
